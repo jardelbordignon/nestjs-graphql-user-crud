@@ -1,5 +1,4 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql'
-import { FindOneOptions } from 'typeorm'
 
 import { CreateUserInput, UpdateUserInput } from './user.dto'
 import { User } from './user.entity'
@@ -16,7 +15,7 @@ export class UserResolver {
 
   @Query(() => User)
   async findOneUserById(@Args('id') id: string): Promise<User> {
-    return this.service.findOneUserById(id)
+    return this.service.findUserById(id)
   }
 
   @Mutation(() => User)
