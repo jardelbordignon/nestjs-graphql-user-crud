@@ -4,15 +4,10 @@ import {
   NotFoundException,
 } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { FindOneOptions, Repository } from 'typeorm'
+import { Repository } from 'typeorm'
 
 import { CreateUserInput, UpdateUserInput } from './user.dto'
 import { User } from './user.entity'
-
-interface IFindOneUser {
-  id?: string
-  options?: FindOneOptions<User>
-}
 
 @Injectable()
 export class UserService {

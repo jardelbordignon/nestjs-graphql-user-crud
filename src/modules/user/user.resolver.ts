@@ -14,7 +14,7 @@ export class UserResolver {
   }
 
   @Query(() => User)
-  async findOneUserById(@Args('id') id: string): Promise<User> {
+  async findUserById(@Args('id') id: string): Promise<User> {
     return this.service.findUserById(id)
   }
 

@@ -21,7 +21,7 @@ type Mutation {
 }
 
 type Query {
-  findOneUserById(id: String!): User!
+  findUserById(id: String!): User!
   findUsers: [User!]!
 }
 
