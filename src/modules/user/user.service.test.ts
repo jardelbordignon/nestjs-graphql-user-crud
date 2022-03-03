@@ -121,7 +121,67 @@ describe('UserService', () => {
     })
   })
 
-  // describe('', () => {
-  //   it('', async () => {})
-  // })
+  describe('updateUser', () => {
+    it('deve atualizar um usuário', async () => {
+      const user = TestUtil.giveAnUser()
+      const mergedUser = Object.assign(user, { name: `${user.name} updated` })
+
+      mockedRepository.findOne.mockReturnValue(user)
+      mockedRepository.save.mockReturnValue(mergedUser)
+
+      const updatedUser = await service.updateUser(mergedUser)
+
+      expect(updatedUser).toHaveProperty('id')
+    })
+  })
+
+  describe('deleteUser', () => {
+    it('deve deletar definitivamente um usuário quando o parâmetro soft for false', async () => {
+      const user = TestUtil.giveAnUser()
+
+      mockedRepository.findOne.mockReturnValue(user)
+      mockedRepository.delete.mockReturnValue(user)
+
+      const isDeleted = await service.deleteUser(user.id, false)
+
+      expect(isDeleted).toBe(true)
+    })
+
+    it('deve deletar (soft delete) um usuário quando o parâmetro soft for true', async () => {
+      const user = TestUtil.giveAnUser()
+
+      mockedRepository.findOne.mockReturnValue(user)
+      mockedRepository.softDelete.mockReturnValue(user)
+
+      const isDeleted = await service.deleteUser(user.id, true)
+
+      expect(isDeleted).toBe(true)
+    })
+  })
+
+  describe('restoreUser', () => {
+    it('deve restaurar um usuário que tenha sido deletado com soft delete', async () => {
+      const user = TestUtil.giveAnUser()
+      const deletedUser = Object.assign(user, { deletedAt: new Date() })
+      const restoredUser = Object.assign(deletedUser, { deletedAt: null })
+
+      mockedRepository.findOne.mockReturnValue(deletedUser)
+      mockedRepository.save.mockReturnValue(restoredUser)
+
+      const restored = await service.restoreUser(user.id)
+
+      expect(restored.deletedAt).toBe(null)
+      expect(mockedRepository.findOne).toHaveBeenCalledTimes(1)
+      expect(mockedRepository.save).toHaveBeenCalledTimes(1)
+    })
+
+    it('deve retornar uma exceção quando não encontrar um usuário', async () => {
+      mockedRepository.findOne.mockReturnValue(null)
+
+      expect(service.restoreUser('some-user-uuid')).rejects.toEqual(
+        new NotFoundException('User not found')
+      )
+      expect(mockedRepository.findOne).toHaveBeenCalledTimes(1)
+    })
+  })
 })

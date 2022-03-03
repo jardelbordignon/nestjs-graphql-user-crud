@@ -47,6 +47,7 @@ export class UserService {
 
   async restoreUser(id: string): Promise<User> {
     const user = await this.repository.findOne(id, { withDeleted: true })
+    if (!user) throw new NotFoundException('User not found')
     const restoredUser = Object.assign(user, { deletedAt: null })
     return this.repository.save(restoredUser)
   }
