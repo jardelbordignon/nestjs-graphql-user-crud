@@ -10,6 +10,10 @@ export class CreateUserInput {
   @IsEmail()
   @IsNotEmpty()
   email: string
+
+  @IsString()
+  @IsNotEmpty()
+  password: string
 }
 
 @InputType()

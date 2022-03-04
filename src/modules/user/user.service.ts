@@ -24,6 +24,12 @@ export class UserService {
     return user
   }
 
+  async findUserByEmail(email: string): Promise<User> {
+    const user = await this.repository.findOne({ where: { email } })
+    if (!user) throw new NotFoundException('User not found')
+    return user
+  }
+
   async createUser(data: CreateUserInput): Promise<User> {
     const createdUser = this.repository.create(data)
     const user = await this.repository.save(createdUser)

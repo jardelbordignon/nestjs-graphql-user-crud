@@ -7,6 +7,7 @@ export class TestUtil {
     const user = new User()
     user.name = name
     user.email = email
+    user.password = '123456'
 
     return user
   }

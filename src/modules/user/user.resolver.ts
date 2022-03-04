@@ -18,6 +18,11 @@ export class UserResolver {
     return this.service.findUserById(id)
   }
 
+  @Query(() => User)
+  async findUserByEmail(@Args('email') email: string): Promise<User> {
+    return this.service.findUserByEmail(email)
+  }
+
   @Mutation(() => User)
   async createUser(@Args('data') data: CreateUserInput): Promise<User> {
     return this.service.createUser(data)

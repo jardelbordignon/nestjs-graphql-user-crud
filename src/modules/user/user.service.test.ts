@@ -86,6 +86,27 @@ describe('UserService', () => {
     })
   })
 
+  describe('findUserByEmail', () => {
+    it('deve encontrar um usuário existente pelo email', async () => {
+      mockedRepository.findOne.mockReturnValue(TestUtil.giveAnUser())
+
+      const user = await service.findUserByEmail('some-user-uuid')
+
+      expect(user).toHaveProperty('id')
+      expect(user.email).toBe('johndoe@email.com')
+      expect(mockedRepository.findOne).toHaveBeenCalledTimes(1)
+    })
+
+    it('deve retornar uma exceção quando não encontrar um usuário', async () => {
+      mockedRepository.findOne.mockReturnValue(null)
+
+      expect(service.findUserByEmail('some-user-uuid')).rejects.toEqual(
+        new NotFoundException('User not found')
+      )
+      expect(mockedRepository.findOne).toHaveBeenCalledTimes(1)
+    })
+  })
+
   describe('createUser', () => {
     it('deve criar um usuário', async () => {
       const user = TestUtil.giveAnUser()
