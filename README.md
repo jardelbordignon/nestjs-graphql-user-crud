@@ -1,7 +1,7 @@
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-  <a href="http://nestjs.com/" target="blank">
-    <img src="https://github.com/jardelbordignon/nestjs-graphql-user-crud/blob/main/public/imgs/graphql.svg" width="100%"/>
+  <a href="https://graphql.org/" target="blank">
+    <img src="https://raw.githubusercontent.com/jardelbordignon/nestjs-graphql-user-crud/main/src/assets/imgs/graphql.svg" width="100px"/>
   </a>
 </p>
 
