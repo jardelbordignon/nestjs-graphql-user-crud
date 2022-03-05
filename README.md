@@ -7,50 +7,33 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+User account and jwt authorization strategy with Nestjs and GraphQL
 
 ## Installation
 
 ```bash
-$ npm install
+$ yarn install
 ```
 
 ## Running the app
 
 ```bash
-# development
-$ npm run start
+# development local
+$ yarn d
 
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+# development docker
+$ npx docker-compose up
 ```
 
 ## Test
 
 ```bash
 # unit tests
-$ npm run test
+$ yarn t
 
-# e2e tests
-$ npm run test:e2e
+# unit tests watch mode
+$ yarn tw
 
-# test coverage
-$ npm run test:cov
+# unit tests with coverage
+$ yarn tc
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
